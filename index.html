@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080f19">
+  <meta name="description" content="用手指拖动，让冬夜里的点阵圣诞树一层层长出来。">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./style.css">
+  <title>Christmas Night</title>
+</head>
+<body>
+  <main class="card">
+    <header class="heading">
+      <span class="heading-ornament" aria-hidden="true"></span>
+      <h1 lang="en">Christmas Night</h1>
+    </header>
+    <canvas id="scene" class="scene" tabindex="0" aria-label="立体点阵圣诞树" aria-describedby="drag-hint keyboard-hint">
+      一棵挂着彩灯、树下放着礼盒的点阵圣诞树。
+    </canvas>
+    <footer class="controls">
+      <div class="guidance">
+        <p id="drag-hint">左右拖动，让树长出来</p>
+        <progress id="growth" max="1" value="0" aria-label="圣诞树生长进度"></progress>
+      </div>
+      <span id="keyboard-hint" class="visually-hidden">也可以按键盘上的左右方向键。</span>
+      <button id="reset" type="button" aria-label="回到初始角度" hidden>回正</button>
+      <button id="restart" type="button" aria-label="重新开始生长" hidden>重来</button>
+    </footer>
+  </main>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

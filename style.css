@@ -1,0 +1,196 @@
+:root {
+  color-scheme: dark;
+  color: #f5e9d5;
+  background: #080f19;
+  font-family: system-ui, sans-serif;
+  --frame: clamp(0.6rem, 2vw, 1.45rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 0;
+  background:
+    radial-gradient(ellipse at 50% 58%, #142b30 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 4%, #162431 0%, #080f19 66%);
+}
+
+.card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-height: 100vh;
+  min-height: 100svh;
+  height: 100dvh;
+  padding: calc(var(--frame) + env(safe-area-inset-top))
+    calc(var(--frame) + env(safe-area-inset-right))
+    calc(var(--frame) + env(safe-area-inset-bottom))
+    calc(var(--frame) + env(safe-area-inset-left));
+}
+
+.card::before, .card::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--frame) + env(safe-area-inset-top))
+    calc(var(--frame) + env(safe-area-inset-right))
+    calc(var(--frame) + env(safe-area-inset-bottom))
+    calc(var(--frame) + env(safe-area-inset-left));
+  pointer-events: none;
+}
+
+.card::before { border: 1px solid #d7b87830; }
+
+.card::after {
+  --gold: #c8a771a8;
+  background:
+    linear-gradient(var(--gold), var(--gold)) top left,
+    linear-gradient(var(--gold), var(--gold)) top right,
+    linear-gradient(var(--gold), var(--gold)) bottom left,
+    linear-gradient(var(--gold), var(--gold)) bottom right,
+    linear-gradient(var(--gold), var(--gold)) top left,
+    linear-gradient(var(--gold), var(--gold)) top right,
+    linear-gradient(var(--gold), var(--gold)) bottom left,
+    linear-gradient(var(--gold), var(--gold)) bottom right;
+  background-size: 20px 1px, 20px 1px, 20px 1px, 20px 1px,
+    1px 20px, 1px 20px, 1px 20px, 1px 20px;
+  background-repeat: no-repeat;
+}
+
+.heading {
+  padding: clamp(1.2rem, 4vh, 2.9rem) 0 0;
+  text-align: center;
+  pointer-events: none;
+}
+
+.heading-ornament {
+  display: grid;
+  place-items: center;
+  position: relative;
+  width: 76px;
+  height: 12px;
+  margin: 0 auto 0.55rem;
+  background: linear-gradient(90deg, transparent, #c7a86d75, transparent) center / 100% 1px no-repeat;
+}
+
+.heading-ornament::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: #edd39c;
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px #e9c88970;
+}
+
+h1 {
+  margin: 0;
+  padding-inline: 0.5rem;
+  font: 400 clamp(2.2rem, 5.2vw, 5rem)/0.98 "Baskerville", "Iowan Old Style", Georgia, serif;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  text-shadow: 0 0 34px #edd39c22;
+}
+
+.scene {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  min-width: 0;
+  min-height: 0;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scene.is-dragging { cursor: grabbing; }
+
+.scene:focus-visible {
+  outline: 1px solid #d5b373;
+  outline-offset: -5px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  --controls-bottom: clamp(0.65rem, 2.2vh, 1.35rem);
+  min-height: calc(44px + var(--controls-bottom));
+  padding: 0 0.5rem var(--controls-bottom);
+  color: #d5d3c8;
+}
+
+.guidance {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+}
+
+.guidance progress {
+  appearance: none;
+  display: block;
+  width: 7.25rem;
+  height: 2px;
+  border: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  background: #d7b87833;
+  color: #e6c487;
+}
+
+.guidance progress::-webkit-progress-bar { background: #d7b87833; }
+.guidance progress::-webkit-progress-value { background: #e6c487; }
+.guidance progress::-moz-progress-bar { background: #e6c487; }
+
+.controls p {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+}
+
+.controls #drag-hint::before {
+  content: "↔";
+  color: #e6c487;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.controls button {
+  min-width: 3.3rem;
+  min-height: 44px;
+  border: 1px solid #d7b87848;
+  border-radius: 100px;
+  padding: 0 0.7rem;
+  background: #d7b8780c;
+  color: #f0d5a1;
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.controls button:hover { background: #d7b87825; }
+.controls button:focus-visible { outline: 2px solid #ead1a0; outline-offset: 3px; }
+.controls [hidden] { display: none; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-height: 530px) and (orientation: landscape) {
+  .heading { padding-top: 0.65rem; }
+  .heading-ornament { display: none; }
+  h1 { font-size: 2.2rem; }
+  .controls { --controls-bottom: 0.22rem; }
+}
